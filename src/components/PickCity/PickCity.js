@@ -9,6 +9,7 @@ const PickCity = ({ action }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     action(city);
+    setCity("");
   };
   return (
     <form className={styles.pickCityForm} onSubmit={handleSubmit}>

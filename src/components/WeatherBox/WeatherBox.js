@@ -10,6 +10,7 @@ const WeatherBox = (props) => {
   const [error, setError] = useState(false);
 
   const handleCityChange = useCallback((city) => {
+    if (!city) return;
     setError(false);
     setPending(true);
     fetch(
@@ -34,9 +35,12 @@ const WeatherBox = (props) => {
   return (
     <section>
       <PickCity action={handleCityChange} />
-      <WeatherSummary weatherData={weatherData} />
+      {weatherData && !error ? (
+        <WeatherSummary weatherData={weatherData} />
+      ) : (
+        error && <ErrorBox />
+      )}
       {pending && !error && <Loader />}
-      {error && <ErrorBox />}
     </section>
   );
 };
